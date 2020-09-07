@@ -1,22 +1,38 @@
-function defaultArguments(f, numbers, numberArg) {
+function defaultArguments(f, numbers, A, B) {
+    console.log('\n', '\n', '\n')
     console.log(arguments)
-    // console.log(f(3,4))
-    
+        
     let numA = numbers.a
     let numB = numbers.b
     let numC = numbers.c
     
-    console.log(numB, numberArg, numA, numC)
-    console.log('\n', '\n', '\n')
+    console.log(numB, A, B, numA, numC)
 
-    return f(numB, numberArg)
+    if (A === undefined && B === undefined && Object.keys(numbers).length <= 1) {
+        console.log('HERE')
+        return NaN
+    }
+
+    if (A && B !== undefined) {
+        console.log('NO HERE')
+        return f(A + B)
+    }
+    if (A && B === undefined && Object.keys(numbers).length >= 2) {
+        console.log('NO NO HERE')
+        return f(numA+numC)
+    }
+    
+    else {
+        console.log('NO NO NO HERE')
+        return f(numB, A)
+    }
 };
 
 function add(a, b) {
     return a + b;
 };
 
-const add2 = (number) => defaultArguments(add, { b: 9 }, number);
+const add2 = (A, B) => defaultArguments(add, { b: 9 }, A, B);
 console.assert(add2(10) === 19);
 console.assert(add2(10, 7) === 17);
 console.assert(isNaN(add2()));
