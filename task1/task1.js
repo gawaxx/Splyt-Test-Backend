@@ -1,19 +1,38 @@
-function defaultArguments(f, numbers, A, B) {
+function defaultArguments(f, givenNumbers, inputNumbers) {
     console.log('\n', '\n', '\n')
     console.log(arguments)
         
-    let a = numbers.a
-    let b = numbers.b
-    let c = numbers.c
-    
-    console.log(a, b, c, A, B)
-    console.log(!a, !b, !c, !A, !B) 
+    let a = givenNumbers.a
+    let b = givenNumbers.b
+    let c = givenNumbers.c
 
-    if (!a) {
-        if (!b) {
-            console.log('hey')
+    
+    // console.log(a, b, c, A, B)
+    console.log(inputNumbers.length > 0)
+    console.log(Object.keys(givenNumbers).length > 0)
+
+    if ( !(Object.keys(givenNumbers).length > 0) ) {
+        if ( !(inputNumbers > 0) ) {
+            return NaN
         }
     }
+
+    // if (!a) {
+    //     if (!b) {
+    //         if (!c) {
+    //             if (!A) {
+    //                 if (!B) {
+    //                     return NaN
+    //                 }
+    //                 return NaN
+    //             }
+    //             if (!B) {
+    //                 return 'hey'
+    //             }
+    //             return f(A+B)
+    //         }
+    //     }
+    // }
 
     
 
@@ -41,7 +60,7 @@ function add(a, b) {
     return a + b;
 };
 
-const add2 = (A, B) => defaultArguments(add, { b: 9 }, A, B);
+const add2 = (...inputNumbers) => defaultArguments(add, { b: 9 }, inputNumbers);
 console.assert(add2(10) === 19);
 console.assert(add2(10, 7) === 17);
 console.assert(isNaN(add2()));
