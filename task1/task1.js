@@ -1,12 +1,15 @@
-function defaultArguments(f, numbers) {
+function defaultArguments(f, numbers, numberArg) {
     console.log(arguments)
     // console.log(f(3,4))
     
+    let numA = numbers.a
     let numB = numbers.b
-    let number = arguments[2]
-    console.log(numB, number)
+    let numC = numbers.c
+    
+    console.log(numB, numberArg, numA, numC)
+    console.log('\n', '\n', '\n')
 
-    return f(numB, number)
+    return f(numB, numberArg)
 };
 
 function add(a, b) {
@@ -18,11 +21,11 @@ console.assert(add2(10) === 19);
 console.assert(add2(10, 7) === 17);
 console.assert(isNaN(add2()));
 
-const add3 = defaultArguments(add2, { b: 3, a: 2 });
+const add3 = (number) => defaultArguments(add2, { b: 3, a: 2 }, number);
 console.assert(add3(10) === 13);
 console.assert(add3() === 5);
 console.assert(add3(undefined, 10) === 12);
 
-const add4 = defaultArguments(add, { c: 3 }); // doesn't do anything, since c isn't
+const add4 = (number) => defaultArguments(add, { c: 3 }); 
 console.assert(isNaN(add4(10)));
 console.assert(add4(10, 10) === 20);
