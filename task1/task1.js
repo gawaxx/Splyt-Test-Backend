@@ -2,30 +2,39 @@ function defaultArguments(f, numbers, A, B) {
     console.log('\n', '\n', '\n')
     console.log(arguments)
         
-    let numA = numbers.a
-    let numB = numbers.b
-    let numC = numbers.c
+    let a = numbers.a
+    let b = numbers.b
+    let c = numbers.c
     
-    console.log(numB, A, B, numA, numC)
+    console.log(a, b, c, A, B)
+    console.log(!a, !b, !c, !A, !B) 
 
-    if (A === undefined && B === undefined && Object.keys(numbers).length <= 1) {
-        console.log('HERE')
-        return NaN
+    if (!a) {
+        if (!b) {
+            console.log('hey')
+        }
     }
 
-    if (A && B !== undefined) {
-        console.log('NO HERE')
-        return f(A + B)
-    }
-    if (A && B === undefined && Object.keys(numbers).length >= 2) {
-        console.log('NO NO HERE')
-        return f(numA+numC)
-    }
     
-    else {
-        console.log('NO NO NO HERE')
-        return f(numB, A)
-    }
+
+    // if (A === undefined && B === undefined && Object.keys(numbers).length <= 1) {
+    //     console.log('HERE')
+    //     return NaN
+    // }
+
+    // if (A && B !== undefined) {
+    //     console.log('NO HERE')
+    //     return f(A + B)
+    // }
+    // if (A && B === undefined && Object.keys(numbers).length >= 2) {
+    //     console.log('NO NO HERE')
+    //     return f(a+numC)
+    // }
+    
+    // else {
+    //     console.log('NO NO NO HERE')
+    //     return f(numB, A)
+    // }
 };
 
 function add(a, b) {
