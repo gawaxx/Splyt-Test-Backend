@@ -1,16 +1,19 @@
-function defaultArguments(f, {num1, num2, num3}) {
-    console.log(f)
-    console.log(num1)
-    console.log(num2)
-    console.log(num3)
-    return f(num1, num2)
+function defaultArguments(f, numbers) {
+    console.log(arguments)
+    // console.log(f(3,4))
+    
+    let numB = numbers.b
+    let number = arguments[2]
+    console.log(numB, number)
+
+    return f(numB, number)
 };
 
 function add(a, b) {
     return a + b;
 };
 
-const add2 = defaultArguments(add, { b: 9 });
+const add2 = (number) => defaultArguments(add, { b: 9 }, number);
 console.assert(add2(10) === 19);
 console.assert(add2(10, 7) === 17);
 console.assert(isNaN(add2()));
