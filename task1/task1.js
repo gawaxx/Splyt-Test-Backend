@@ -1,4 +1,6 @@
-
+function defaultArguments(f, []) {
+    return console.log("Here");
+};
 
 function add(a, b) {
     return a + b;
