@@ -10,6 +10,16 @@ let personA = schedules[0]
 let personB = schedules[1]
 let personC = schedules[2]
 
+
+// const createBusinessMenSingularSchedules = (schedules, meetingLength) => {
+//     let allPersons = {}
+//     schedules.map( row => {
+//         // return allPersons.push({ person: row })
+//         Object.assign(allPersons, { person: row })
+//         areAllBusinessMenFree(allPersons, meetingLength)
+//     })
+// }
+
 const translateTime = (meetingTime) => {
     meetingTimeArray = meetingTime.split(':')
     meetingTimeSeconds = meetingTimeArray[0] * 3600 + meetingTimeArray[1] * 60
@@ -33,8 +43,8 @@ const isBusinessManFree = (personNumber, meetingLength) => {
     let schedule = convertEmployeeScheduleTime(personNumber)
     let meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
 
-    console.log('\n', '\n')
-    console.log(schedule)
+    // console.log('\n', '\n')
+    // console.log(schedule)
 
     let i = 0
     let freeTime = []
@@ -53,7 +63,7 @@ const isBusinessManFree = (personNumber, meetingLength) => {
         }
     })
 
-    return freeSlotBegining
+    return freeSlotBegining.length > 0? freeSlotBegining : null
     
 }
 
@@ -68,15 +78,49 @@ const convertEmployeeScheduleTime = (schedule) => {
     return translatedSchedules
 }
 
-const areAllBusinessMenFree = (personA, personB, personC, meetingLength) => {
-    let personAfree = isBusinessManFree(personA, meetingLength)
-    let personBfree = isBusinessManFree(personB, meetingLength)
-    let personCfree = isBusinessManFree(personC, meetingLength)
+const areAllBusinessMenFree = (schedules, meetingLength) => {
 
-    console.log(personAfree, personBfree, personCfree)
+    // console.log(allPersons)
 
-    console.log( convertFromSecondsToMinutes(Math.max(personAfree[0], personBfree[0], personCfree[0])) )
-    return Math.max(personAfree[0], personBfree[0], personCfree[0])
+    schedules.map( row => {
+
+        let rowResult = isBusinessManFree(row, meetingLength)
+
+        if ( rowResult === null ) {
+            console.log("Sorry, the meeting does not fit the schedule.")
+        } else {
+            // console.log('here')
+            console.log(rowResult)
+            // let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
+            // let convertHighestValue = convertFromSecondsToMinutes(highestValue)
+            // console.log( "The earliest meeting time is " + convertHighestValue )
+        }
+    })
+
+    // Object.keys(allPersons).map( key, person => {
+    //     isBusinessManFree(allPersons[person], meetingLength)
+    //     if ( allPersons[person] === null ) {
+    //         console.log("Sorry, the meeting does not fit the schedule.")
+    //     } else {
+    //         console.log('here')
+    //         // let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
+    //         // let convertHighestValue = convertFromSecondsToMinutes(highestValue)
+    //         // console.log( "The earliest meeting time is " + convertHighestValue )
+    //     }
+    // })
+
+    // let personAfree = isBusinessManFree(personA, meetingLength)
+    // let personBfree = isBusinessManFree(personB, meetingLength)
+    // let personCfree = isBusinessManFree(personC, meetingLength)
+
+    // if ( (personAfree || personBfree || personCfree) === null ) {
+    //     console.log("Sorry, the meeting does not fit the schedule.")
+    // } else {
+    //     let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
+    //     let convertHighestValue = convertFromSecondsToMinutes(highestValue)
+    //     console.log( "The earliest meeting time is " + convertHighestValue )
+    // }
 }
 
-areAllBusinessMenFree(personA, personB, personC, meetingLength)
+// createBusinessMenSingularSchedules(schedules)
+areAllBusinessMenFree(schedules, meetingLength)
