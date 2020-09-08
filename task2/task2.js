@@ -16,6 +16,14 @@ const translateTime = (meetingTime) => {
     return meetingTimeSeconds
 }
 
+const convertFromSecondsToMinutes = (meetingTime) => {
+    let hours = Math.floor(meetingTime / 3600)
+    meetingTime %= 3600;
+    let minutes = Math.floor(meetingTime / 60);
+
+    return `${hours}:${minutes}`
+}
+
 const meetingLengthToSeconds = (meetingLength) => {
     return meetingLength*60
 }
@@ -67,7 +75,7 @@ const areAllBusinessMenFree = (personA, personB, personC, meetingLength) => {
 
     console.log(personAfree, personBfree, personCfree)
 
-    console.log(Math.max(personAfree[0], personBfree[0], personCfree[0]))
+    console.log( convertFromSecondsToMinutes(Math.max(personAfree[0], personBfree[0], personCfree[0])) )
     return Math.max(personAfree[0], personBfree[0], personCfree[0])
 }
 
