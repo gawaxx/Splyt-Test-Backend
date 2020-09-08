@@ -20,24 +20,56 @@ const meetingLengthToSeconds = (meetingLength) => {
     return meetingLength*60
 }
 
-const meetingDuration = (meetingTime) => {
-    let meetingStart = meetingTime[0];
-    let meetingEnd = meetingTime[1];
 
-    return meetingEnd - meetingStart
+const isBusinessManFree = (personNumber, meetingLength) => {
+    
+    let schedule = convertEmployeeScheduleTime(personNumber)
+    meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
+
+    let sMap = schedule.map( cell => {
+        return cell[0] - cell [1]
+    })
+
+    console.log(sMap)
+    
 }
 
-const convertSceduleTime = (schedules) => {
-
-    let translatedSchedules = schedules.map(row => {
-        return row.map(cell => {
-            return cell.map( time => {
-                return translateTime(time)
-            })
+const convertEmployeeScheduleTime = (schedule) => {
+    
+    let translatedSchedules = schedule.map( cell => {
+        return cell.map( time => {
+            return translateTime(time)
         })
     })
 
-} 
+    return translatedSchedules
+}
 
-convertSceduleTime(schedules)
+// convertEmployeeScheduleTime(personA)
 
+isBusinessManFree(personA,meetingLength)
+
+
+
+
+// const meetingDuration = (meetingTime) => {
+//     let meetingStart = meetingTime[0];
+//     let meetingEnd = meetingTime[1];
+
+//     return meetingEnd - meetingStart
+// }
+
+
+// const convertSceduleTime = (schedules) => {
+    
+//     let translatedSchedules = schedules.map(row => {
+//         return row.map(cell => {
+//             return cell.map( time => {
+//                 return translateTime(time)
+//             })
+//         })
+//     })
+
+//     console.log(translatedSchedules)
+
+// } 
