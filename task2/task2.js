@@ -82,6 +82,8 @@ const areAllBusinessMenFree = (schedules, meetingLength) => {
 
     // console.log(allPersons)
 
+    let finalResults = []
+
     schedules.map( row => {
 
         let rowResult = isBusinessManFree(row, meetingLength)
@@ -90,12 +92,18 @@ const areAllBusinessMenFree = (schedules, meetingLength) => {
             console.log("Sorry, the meeting does not fit the schedule.")
         } else {
             // console.log('here')
-            console.log(rowResult)
+            // console.log(rowResult[0])
+            finalResults.push(rowResult[0])
             // let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
             // let convertHighestValue = convertFromSecondsToMinutes(highestValue)
             // console.log( "The earliest meeting time is " + convertHighestValue )
         }
     })
+
+    let highestValue = Math.max.apply(null, finalResults)
+    let convertHighestValue = convertFromSecondsToMinutes(highestValue)
+    console.log( "The earliest meeting time is " + convertHighestValue )
+
 
     // Object.keys(allPersons).map( key, person => {
     //     isBusinessManFree(allPersons[person], meetingLength)
