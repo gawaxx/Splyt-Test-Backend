@@ -39,7 +39,7 @@ const isBusinessManFree = (personNumber, meetingLength) => {
 
     freeTime.filter( time => {
         if (time >= meetingLengthInSeconds) {
-            freeSlotBegining.push(schedule[(freeTime.indexOf(time))][1])
+            freeSlotBegining.push(schedule[(freeTime.indexOf(time))][1]) //work out which part of the schedule the freetime slot corresponds to, and return the ending of the previous meeting.
         } else {
             return null
         }
@@ -66,6 +66,9 @@ const areAllBusinessMenFree = (personA, personB, personC, meetingLength) => {
     let personCfree = isBusinessManFree(personC, meetingLength)
 
     console.log(personAfree, personBfree, personCfree)
+
+    console.log(Math.max(personAfree[0], personBfree[0], personCfree[0]))
+    return Math.max(personAfree[0], personBfree[0], personCfree[0])
 }
 
 areAllBusinessMenFree(personA, personB, personC, meetingLength)
