@@ -20,7 +20,6 @@ const meetingLengthToSeconds = (meetingLength) => {
     return meetingLength*60
 }
 
-
 const isBusinessManFree = (personNumber, meetingLength) => {
     
     let schedule = convertEmployeeScheduleTime(personNumber)
@@ -38,7 +37,9 @@ const isBusinessManFree = (personNumber, meetingLength) => {
 
     freeTime.map( time => {
         if (time >= meetingLengthInSeconds) {
-            console.log('true')
+            return true, schedule[(freeTime.indexOf(time))][1] // return true and time at which business man is available.
+        } else {
+            return null
         }
     })
     
@@ -55,31 +56,5 @@ const convertEmployeeScheduleTime = (schedule) => {
     return translatedSchedules
 }
 
-// convertEmployeeScheduleTime(personA)
 
 isBusinessManFree(personA,meetingLength)
-
-
-
-
-// const meetingDuration = (meetingTime) => {
-//     let meetingStart = meetingTime[0];
-//     let meetingEnd = meetingTime[1];
-
-//     return meetingEnd - meetingStart
-// }
-
-
-// const convertSceduleTime = (schedules) => {
-    
-//     let translatedSchedules = schedules.map(row => {
-//         return row.map(cell => {
-//             return cell.map( time => {
-//                 return translateTime(time)
-//             })
-//         })
-//     })
-
-//     console.log(translatedSchedules)
-
-// } 
