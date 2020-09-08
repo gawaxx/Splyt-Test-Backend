@@ -20,24 +20,55 @@ const meetingLengthToSeconds = (meetingLength) => {
     return meetingLength*60
 }
 
-const meetingDuration = (meetingTime) => {
-    let meetingStart = meetingTime[0];
-    let meetingEnd = meetingTime[1];
+const isBusinessManFree = (personNumber, meetingLength) => {
+    
+    let schedule = convertEmployeeScheduleTime(personNumber)
+    let meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
 
-    return meetingEnd - meetingStart
+    console.log('\n', '\n')
+    console.log(schedule)
+
+    let i = 0
+    let freeTime = []
+    let freeSlotBegining = []
+
+    while ( i < schedule.length - 1 ) {
+        freeTime.push(schedule[i+1][0] - schedule[i][1])
+        ++i
+    }
+
+    freeTime.filter( time => {
+        if (time >= meetingLengthInSeconds) {
+            freeSlotBegining.push(schedule[(freeTime.indexOf(time))][1]) //work out which part of the schedule the freetime slot corresponds to, and return the ending of the previous meeting.
+        } else {
+            return null
+        }
+    })
+
+    return freeSlotBegining
+    
 }
 
-const convertSceduleTime = (schedules) => {
-
-    let translatedSchedules = schedules.map(row => {
-        return row.map(cell => {
-            return cell.map( time => {
-                return translateTime(time)
-            })
+const convertEmployeeScheduleTime = (schedule) => {
+    
+    let translatedSchedules = schedule.map( cell => {
+        return cell.map( time => {
+            return translateTime(time)
         })
     })
 
-} 
+    return translatedSchedules
+}
 
-convertSceduleTime(schedules)
+const areAllBusinessMenFree = (personA, personB, personC, meetingLength) => {
+    let personAfree = isBusinessManFree(personA, meetingLength)
+    let personBfree = isBusinessManFree(personB, meetingLength)
+    let personCfree = isBusinessManFree(personC, meetingLength)
 
+    console.log(personAfree, personBfree, personCfree)
+
+    console.log(Math.max(personAfree[0], personBfree[0], personCfree[0]))
+    return Math.max(personAfree[0], personBfree[0], personCfree[0])
+}
+
+areAllBusinessMenFree(personA, personB, personC, meetingLength)
