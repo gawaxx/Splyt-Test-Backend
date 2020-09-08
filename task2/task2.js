@@ -4,7 +4,7 @@ let schedules = [
     [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
 ];
 
-let meetingLength = 800
+let meetingLength = 50
 
 const translateTime = (meetingTime) => {
     meetingTimeArray = meetingTime.split(':')
@@ -80,7 +80,7 @@ const areAllBusinessMenFree = (schedules, meetingLength) => {
 
     })
     
-    if ( (Math.max.apply(null, finalResults)) === NaN) {
+    if ( !!(Math.max.apply(null, finalResults)) ) {
         let highestValue = Math.max.apply(null, finalResults)
         let convertHighestValue = convertFromSecondsToMinutes(highestValue)
         console.log( "The earliest meeting time is " + convertHighestValue )
