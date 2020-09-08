@@ -4,7 +4,7 @@ let schedules = [
     [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
 ];
 
-let meetingLength = 50
+let meetingLength = 60
 
 const translateTime = (meetingTime) => {
     meetingTimeArray = meetingTime.split(':')
