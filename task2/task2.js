@@ -39,14 +39,13 @@ const isBusinessManFree = (personNumber, meetingLength) => {
 
     freeTime.filter( time => {
         if (time >= meetingLengthInSeconds) {
-            // console.log('free')
-            // console.log(schedule[(freeTime.indexOf(time))][1])
             freeSlotBegining.push(schedule[(freeTime.indexOf(time))][1])
         } else {
-            // console.log('not free')
             return null
         }
     })
+
+    return freeSlotBegining
     
 }
 
