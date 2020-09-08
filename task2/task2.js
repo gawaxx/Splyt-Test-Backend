@@ -23,22 +23,27 @@ const meetingLengthToSeconds = (meetingLength) => {
 const isBusinessManFree = (personNumber, meetingLength) => {
     
     let schedule = convertEmployeeScheduleTime(personNumber)
-    meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
+    let meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
 
+    console.log('\n', '\n')
     console.log(schedule)
 
     let i = 0
     let freeTime = []
-    
+    let freeSlotBegining = []
+
     while ( i < schedule.length - 1 ) {
         freeTime.push(schedule[i+1][0] - schedule[i][1])
         ++i
     }
 
-    freeTime.map( time => {
+    freeTime.filter( time => {
         if (time >= meetingLengthInSeconds) {
-            return true, schedule[(freeTime.indexOf(time))][1] // return true and time at which business man is available.
+            // console.log('free')
+            // console.log(schedule[(freeTime.indexOf(time))][1])
+            freeSlotBegining.push(schedule[(freeTime.indexOf(time))][1])
         } else {
+            // console.log('not free')
             return null
         }
     })
@@ -56,5 +61,12 @@ const convertEmployeeScheduleTime = (schedule) => {
     return translatedSchedules
 }
 
+const areAllBusinessMenFree = (personA, personB, personC, meetingLength) => {
+    let personAfree = isBusinessManFree(personA, meetingLength)
+    let personBfree = isBusinessManFree(personB, meetingLength)
+    let personCfree = isBusinessManFree(personC, meetingLength)
 
-isBusinessManFree(personA,meetingLength)
+    console.log(personAfree, personBfree, personCfree)
+}
+
+areAllBusinessMenFree(personA, personB, personC, meetingLength)
