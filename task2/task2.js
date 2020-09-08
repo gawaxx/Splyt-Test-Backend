@@ -4,16 +4,20 @@ let schedules = [
     [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
 ];
 
-let meetingLength = 50
-
-let personA = schedules[0]
-let personB = schedules[1]
-let personC = schedules[2]
+let meetingLength = 60
 
 const translateTime = (meetingTime) => {
     meetingTimeArray = meetingTime.split(':')
     meetingTimeSeconds = meetingTimeArray[0] * 3600 + meetingTimeArray[1] * 60
     return meetingTimeSeconds
+}
+
+const convertFromSecondsToMinutes = (meetingTime) => {
+    let hours = Math.floor(meetingTime / 3600)
+    meetingTime %= 3600;
+    let minutes = Math.floor(meetingTime / 60);
+
+    return `${hours}:${minutes}`
 }
 
 const meetingLengthToSeconds = (meetingLength) => {
@@ -25,8 +29,8 @@ const isBusinessManFree = (personNumber, meetingLength) => {
     let schedule = convertEmployeeScheduleTime(personNumber)
     let meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
 
-    console.log('\n', '\n')
-    console.log(schedule)
+    // console.log('\n', '\n')
+    // console.log(schedule)
 
     let i = 0
     let freeTime = []
@@ -45,7 +49,7 @@ const isBusinessManFree = (personNumber, meetingLength) => {
         }
     })
 
-    return freeSlotBegining
+    return freeSlotBegining.length > 0? freeSlotBegining : null
     
 }
 
@@ -60,15 +64,30 @@ const convertEmployeeScheduleTime = (schedule) => {
     return translatedSchedules
 }
 
-const areAllBusinessMenFree = (personA, personB, personC, meetingLength) => {
-    let personAfree = isBusinessManFree(personA, meetingLength)
-    let personBfree = isBusinessManFree(personB, meetingLength)
-    let personCfree = isBusinessManFree(personC, meetingLength)
+const areAllBusinessMenFree = (schedules, meetingLength) => {
 
-    console.log(personAfree, personBfree, personCfree)
+    let finalResults = []
 
-    console.log(Math.max(personAfree[0], personBfree[0], personCfree[0]))
-    return Math.max(personAfree[0], personBfree[0], personCfree[0])
+    schedules.map( row => {
+
+        let rowResult = isBusinessManFree(row, meetingLength)
+
+        if ( rowResult === null ) {
+            finalResults.push('NaN')
+        } else {
+            finalResults.push(rowResult[0])
+        }
+
+    })
+    
+    if ( !!(Math.max.apply(null, finalResults)) ) {
+        let highestValue = Math.max.apply(null, finalResults)
+        let convertHighestValue = convertFromSecondsToMinutes(highestValue)
+        console.log( "The earliest meeting time is " + convertHighestValue )
+    } else {
+        console.log("Sorry no free space can be found for this meeting length")
+    }
+
 }
 
-areAllBusinessMenFree(personA, personB, personC, meetingLength)
+areAllBusinessMenFree(schedules, meetingLength)
