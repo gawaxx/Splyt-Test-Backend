@@ -2,14 +2,15 @@ function defaultArguments(f, givenNumbers, inputNumbers) {
     console.log('\n', '\n', '\n')
     console.log('start')
     console.log(arguments)
-        
+    
     let a = givenNumbers.a
     let b = givenNumbers.b
     let c = givenNumbers.c
-
+    
     let A = inputNumbers !== undefined? inputNumbers[0] : undefined
     let B = inputNumbers !== undefined? inputNumbers[1] : undefined
-
+    
+    // console.log((!a || !b))
     console.log(!a, !b, !A, !B)
     console.log(a, b, A, B)
     console.log(inputNumbers !== undefined)
@@ -18,10 +19,12 @@ function defaultArguments(f, givenNumbers, inputNumbers) {
     if ( (Object.keys(givenNumbers).length > 0) || (inputNumbers !== undefined) ) {
         if (a && b) {
             console.log('a+b')
-            return f(a, b)
+            console.log(f)
+            console.log(a+b)
+            return f(b, a)
         }
 
-        if (A && B) {
+        if ( (A && B) ) {
             console.log('A+B')
             return f(A, B)
         }
