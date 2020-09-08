@@ -4,21 +4,7 @@ let schedules = [
     [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
 ];
 
-let meetingLength = 50
-
-let personA = schedules[0]
-let personB = schedules[1]
-let personC = schedules[2]
-
-
-// const createBusinessMenSingularSchedules = (schedules, meetingLength) => {
-//     let allPersons = {}
-//     schedules.map( row => {
-//         // return allPersons.push({ person: row })
-//         Object.assign(allPersons, { person: row })
-//         areAllBusinessMenFree(allPersons, meetingLength)
-//     })
-// }
+let meetingLength = 800
 
 const translateTime = (meetingTime) => {
     meetingTimeArray = meetingTime.split(':')
@@ -80,8 +66,6 @@ const convertEmployeeScheduleTime = (schedule) => {
 
 const areAllBusinessMenFree = (schedules, meetingLength) => {
 
-    // console.log(allPersons)
-
     let finalResults = []
 
     schedules.map( row => {
@@ -89,46 +73,21 @@ const areAllBusinessMenFree = (schedules, meetingLength) => {
         let rowResult = isBusinessManFree(row, meetingLength)
 
         if ( rowResult === null ) {
-            console.log("Sorry, the meeting does not fit the schedule.")
+            finalResults.push('NaN')
         } else {
-            // console.log('here')
-            // console.log(rowResult[0])
             finalResults.push(rowResult[0])
-            // let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
-            // let convertHighestValue = convertFromSecondsToMinutes(highestValue)
-            // console.log( "The earliest meeting time is " + convertHighestValue )
         }
+
     })
+    
+    if ( (Math.max.apply(null, finalResults)) === NaN) {
+        let highestValue = Math.max.apply(null, finalResults)
+        let convertHighestValue = convertFromSecondsToMinutes(highestValue)
+        console.log( "The earliest meeting time is " + convertHighestValue )
+    } else {
+        console.log("Sorry no free space can be found for this meeting length")
+    }
 
-    let highestValue = Math.max.apply(null, finalResults)
-    let convertHighestValue = convertFromSecondsToMinutes(highestValue)
-    console.log( "The earliest meeting time is " + convertHighestValue )
-
-
-    // Object.keys(allPersons).map( key, person => {
-    //     isBusinessManFree(allPersons[person], meetingLength)
-    //     if ( allPersons[person] === null ) {
-    //         console.log("Sorry, the meeting does not fit the schedule.")
-    //     } else {
-    //         console.log('here')
-    //         // let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
-    //         // let convertHighestValue = convertFromSecondsToMinutes(highestValue)
-    //         // console.log( "The earliest meeting time is " + convertHighestValue )
-    //     }
-    // })
-
-    // let personAfree = isBusinessManFree(personA, meetingLength)
-    // let personBfree = isBusinessManFree(personB, meetingLength)
-    // let personCfree = isBusinessManFree(personC, meetingLength)
-
-    // if ( (personAfree || personBfree || personCfree) === null ) {
-    //     console.log("Sorry, the meeting does not fit the schedule.")
-    // } else {
-    //     let highestValue = Math.max(personAfree[0], personBfree[0], personCfree[0])
-    //     let convertHighestValue = convertFromSecondsToMinutes(highestValue)
-    //     console.log( "The earliest meeting time is " + convertHighestValue )
-    // }
 }
 
-// createBusinessMenSingularSchedules(schedules)
 areAllBusinessMenFree(schedules, meetingLength)
