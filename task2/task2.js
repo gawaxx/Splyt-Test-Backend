@@ -26,11 +26,21 @@ const isBusinessManFree = (personNumber, meetingLength) => {
     let schedule = convertEmployeeScheduleTime(personNumber)
     meetingLengthInSeconds = meetingLengthToSeconds(meetingLength)
 
-    let sMap = schedule.map( cell => {
-        return cell[0] - cell [1]
-    })
+    console.log(schedule)
 
-    console.log(sMap)
+    let i = 0
+    let freeTime = []
+    
+    while ( i < schedule.length - 1 ) {
+        freeTime.push(schedule[i+1][0] - schedule[i][1])
+        ++i
+    }
+
+    freeTime.map( time => {
+        if (time >= meetingLengthInSeconds) {
+            console.log('true')
+        }
+    })
     
 }
 
